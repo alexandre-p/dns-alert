@@ -1,7 +1,6 @@
 from SOAPpy import WSDL, Errors
 import ConfigParser
 
-
 OVH_WSDL_URL = 'http://www.ovh.com/soapi/soapi-re-latest.wsdl'
 
 def main():
@@ -22,8 +21,9 @@ def main():
         for domain in domains:
             result = client.domainCheck(session, domain)
             for info in result['item']:
-                if info['predicate'] == 'is_available' and info['value'] is True:
-                    print('Domain %s is available' % domain)
+                if info['predicate'] == 'is_available':
+                    if info['value'] is True:
+                        print('Domain %s is available' % domain)
     except Errors.Error, e:
         print(e)
 
